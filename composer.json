@@ -64,10 +64,7 @@
         "laravel": {
             "providers": [
                 "Yonko\\LaravelCachedPagination\\LaravelCachedPaginationServiceProvider"
-            ],
-            "aliases": {
-                "LaravelCachedPagination": "Yonko\\LaravelCachedPagination\\Facades\\LaravelCachedPagination"
-            }
+            ]
         }
     },
     "minimum-stability": "stable",

@@ -8,15 +8,18 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class LaravelCachedPaginationServiceProvider extends PackageServiceProvider
 {
-    public function boot()
-    {
-        parent::boot();
-        Builder::mixin(new CachedPaginationMacro);
-    }
-
     public function configurePackage(Package $package): void
     {
         $package->name('laravel-cached-pagination')
             ->hasConfigFile('cached-pagination');
+    }
+
+    /**
+     * The `packageBooted` method will be executed
+     * after all the package's features have been booted.
+     */
+    public function packageBooted(): void
+    {
+        Builder::mixin(new CachedPaginationMacro);
     }
 }
