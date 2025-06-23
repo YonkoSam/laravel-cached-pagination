@@ -55,7 +55,7 @@ class CachedPaginationTest extends TestCase
     {
         DB::enableQueryLog();
         TestModel::cachedPaginate(60);
-        $this->assertCount(2, DB::getQueryLog()); // Count + Results
+        $this->assertCount(2, DB::getQueryLog());
         DB::flushQueryLog();
 
         TestModel::cachedPaginate(60);
@@ -89,7 +89,7 @@ class CachedPaginationTest extends TestCase
         TestModel::cachedPaginate();
 
         $key = TestModel::query()->getCacheKey('paginate', 15, 'page', 1);
-        $this->assertNotNull(Cache::tags(TestModel::getPaginationCacheTag())->get($key));
+        $this->assertNotNull(Cache::get($key)->get());
     }
 
     /** @test */
