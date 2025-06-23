@@ -23,6 +23,10 @@ class CachedPaginationMacro
 
             $cacheKey = $this->getCacheKey('paginate', $perPage, $pageName, $page);
 
+            if (! method_exists(Cache::getStore(), 'tags')) {
+                return $this->paginate($perPage, $columns, $pageName, $page);
+            }
+
             return Cache::tags($this->model::getPaginationCacheTag())->remember($cacheKey, $ttl, function () use ($perPage, $columns, $pageName, $page) {
                 return $this->paginate($perPage, $columns, $pageName, $page);
             });
@@ -40,9 +44,10 @@ class CachedPaginationMacro
             $ttl = $ttl ?? config('cached-pagination.ttl');
             $page = $page ?: Paginator::resolveCurrentPage($pageName);
             $perPage = $perPage ?: $this->model->getPerPage();
-
             $cacheKey = $this->getCacheKey('simplePaginate', $perPage, $pageName, $page);
-
+            if (! method_exists(Cache::getStore(), 'tags')) {
+                return $this->simplePaginate($perPage, $columns, $pageName, $page);
+            }
             return Cache::tags($this->model::getPaginationCacheTag())->remember($cacheKey, $ttl, function () use ($perPage, $columns, $pageName, $page) {
                 return $this->simplePaginate($perPage, $columns, $pageName, $page);
             });
@@ -62,6 +67,9 @@ class CachedPaginationMacro
             $perPage = $perPage ?: $this->model->getPerPage();
 
             $cacheKey = $this->getCacheKey('cursorPaginate', $perPage, $cursorName, $cursor);
+            if (! method_exists(Cache::getStore(), 'tags')) {
+                return $this->cursorPaginate($perPage, $columns, $cursorName, $cursor);
+            }
 
             return Cache::tags($this->model::getPaginationCacheTag())->remember($cacheKey, $ttl, function () use ($perPage, $columns, $cursorName, $cursor) {
                 return $this->cursorPaginate($perPage, $columns, $cursorName, $cursor);
