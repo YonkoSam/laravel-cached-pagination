@@ -48,6 +48,7 @@ class CachedPaginationMacro
             if (! method_exists(Cache::getStore(), 'tags')) {
                 return $this->simplePaginate($perPage, $columns, $pageName, $page);
             }
+
             return Cache::tags($this->model::getPaginationCacheTag())->remember($cacheKey, $ttl, function () use ($perPage, $columns, $pageName, $page) {
                 return $this->simplePaginate($perPage, $columns, $pageName, $page);
             });
