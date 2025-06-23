@@ -89,7 +89,7 @@ class CachedPaginationTest extends TestCase
         TestModel::cachedPaginate();
 
         $key = TestModel::query()->getCacheKey('paginate', 15, 'page', 1);
-        $this->assertNotNull(Cache::get($key)->get());
+        $this->assertNotNull(Cache::tags(TestModel::getPaginationCacheTag())->get($key));
     }
 
     /** @test */

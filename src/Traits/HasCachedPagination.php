@@ -4,7 +4,6 @@ namespace Yonko\LaravelCachedPagination\Traits;
 
 use Illuminate\Support\Facades\Cache;
 
-// RENAME THE TRAIT HERE
 trait HasCachedPagination
 {
     /**

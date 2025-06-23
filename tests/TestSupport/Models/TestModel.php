@@ -3,11 +3,11 @@
 namespace Yonko\LaravelCachedPagination\Tests\TestSupport\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Yonko\LaravelCachedPagination\Traits\ManagesCachedPagination;
+use Yonko\LaravelCachedPagination\Traits\HasCachedPagination;
 
 class TestModel extends Model
 {
-    use ManagesCachedPagination;
+    use HasCachedPagination;
 
     protected $guarded = [];
 
